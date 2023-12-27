@@ -18,15 +18,17 @@ import google.generativeai as genai
 
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
-## Function to load Gemini Pro Vision
+
+### Function to load Gemini Pro Vision
+
 model = genai.GenerativeModel('gemini-pro-vision')
 
-## Extracting Information from Images
+### Extracting Information from Images
 def get_gemini_response(input, image, prompt):
     response = model.generate_content([input, image[0], prompt])
     return response.text
 
-## Converting Image to Bytes with Information
+### Converting Image to Bytes with Information
 def input_image_details(uploaded_file):
     if uploaded_file is not None:
         bytes_data = uploaded_file.getvalue()
@@ -41,19 +43,7 @@ def input_image_details(uploaded_file):
     else:
         raise FileNotFoundError("No file found")
 
-##def input_image_details(uploaded_file):
-    if uploaded_file is not None:
-        bytes_data = uploaded_file.getvalue()
 
-        image_parts = [
-            {
-                "mime_type": uploaded_file.type,
-                "data": bytes_data
-            }
-        ]
-        return image_parts
-    else:
-        raise FileNotFoundError("No file found")
 
 
 
@@ -61,21 +51,21 @@ Executing Gemini Pro Vision API Call
 
 python
 
-# If submit button is clicked
+### If submit button is clicked
 if submit:
     image_data = input_image_details(uploaded_file)
     response = get_gemini_response(input_prompt, image_data, input)
     st.subheader("The Response is ")
     st.write(response)
 
-# Usage
+### Usage
 
     Run the Streamlit app using the provided setup instructions.
     Upload an image in JPG, JPEG, or PNG format.
     Enter a prompt in the input field to instruct the system.
     Click the "Tell me about this image" button to receive information extracted from the image.
 
-Prompt Example
+### Prompt Example
 
 python
 
